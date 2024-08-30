@@ -1,0 +1,62 @@
+To develop an agent-based workflow for the provided Invoice Processing Workflow, we can break down each step into specific agents with defined goals. Here is a detailed description of each agent and the workflow process:
+
+### Agents and Their Goals
+
+1. **Email Receipt Agent**
+   - **Goal:** Monitor the email inbox for incoming invoices and retrieve them for processing.
+   
+2. **OCR Extraction Agent**
+   - **Goal:** Use Optical Character Recognition (OCR) to extract text from the received invoice documents.
+   
+3. **Document Analysis Agent**
+   - **Goal:** Analyze the extracted text using a pre-built document intelligence model to identify and categorize relevant information.
+   
+4. **Extraction Refinement Agent**
+   - **Goal:** Refine the extracted data and map it into expected fields (e.g., invoice number, date, amount, vendor).
+   
+5. **Review Agent**
+   - **Goal:** Review the refined extract to check for completeness and accuracy.
+   
+6. **Completion Check Agent**
+   - **Goal:** Determine if the extracted and refined data is complete and accurate.
+   
+7. **Final Formatting Agent**
+   - **Goal:** Perform final formatting to ensure consistency of the extracted values before the data is used or stored.
+
+### Workflow Process
+
+1. **Start**
+   - The process begins with the initiation of the workflow.
+
+2. **Email Receipt of Invoice**
+   - **Email Receipt Agent** monitors the email inbox and retrieves incoming invoices.
+   - **Output:** Retrieved invoice document.
+
+3. **Extraction of Text using OCR Model**
+   - **OCR Extraction Agent** processes the retrieved invoice document to extract text using OCR technology.
+   - **Output:** Extracted text from the invoice.
+
+4. **Analysis of Document using Pre-built Document Intelligence Model**
+   - **Document Analysis Agent** analyzes the extracted text to identify and categorize relevant information using a pre-built document intelligence model.
+   - **Output:** Categorized and identified data from the invoice.
+
+5. **Refinement of Extraction and Mapping into Expected Fields**
+   - **Extraction Refinement Agent** refines the extracted data and maps it into expected fields such as invoice number, date, amount, and vendor.
+   - **Output:** Refined and mapped data.
+
+6. **Review Extract to Check for Completeness**
+   - **Review Agent** reviews the refined extract to ensure completeness and accuracy.
+   - **Output:** Reviewed data.
+
+7. **Is Complete?**
+   - **Completion Check Agent** checks if the data is complete and accurate.
+   - If **No**, the workflow loops back to the **Refinement of Extraction and Mapping into Expected Fields** step for further refinement.
+   - If **Yes**, the workflow proceeds to the next step.
+
+8. **Final Formatting to Ensure Consistency of Extraction Values**
+   - **Final Formatting Agent** performs final formatting to ensure consistency of the extracted values.
+   - **Output:** Formatted and consistent data ready for use or storage.
+
+### Summary
+
+This agent-based workflow ensures that each step of the invoice processing is handled by a specialized agent, leading to a streamlined and efficient process. The agents work together to monitor, extract, analyze, refine, review, and format the invoice data, ensuring accuracy and completeness at each stage.

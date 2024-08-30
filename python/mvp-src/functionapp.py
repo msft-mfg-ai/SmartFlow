@@ -37,10 +37,10 @@ def agent_orchestrator(context):
     extraction_refinement_res = yield context.call_activity("extraction_refinement_agent", document_analysis_res)
 
     # Step 5-6: Review and Completion Check Loop
-    final_refinement_res = yield context.call_sub_orchestrator("review_and_completion_loop", extraction_refinement_res)
+    extraction_refinement_res = yield context.call_sub_orchestrator("review_and_completion_loop", extraction_refinement_res)
 
     # Step 7: Final Formatting to Ensure Consistency of Extraction Values
-    final_formatting_res = yield context.call_activity("final_formatting_agent", final_refinement_res)
+    final_formatting_res = yield context.call_activity("final_formatting_agent", extraction_refinement_res)
 
     return final_formatting_res
 
@@ -57,50 +57,52 @@ def review_and_completion_loop(context):
         completion_check_res = yield context.call_activity("completion_check_agent", review_res)
 
         if completion_check_res.get("is_complete"):
-            return review_res
+            break
         else:
             # Loop back to Step 4 for further refinement
             extraction_refinement_res = yield context.call_activity("extraction_refinement_agent", review_res)
+
+    return extraction_refinement_res
 
 # Activities
 @app.activity_trigger(input_name="activitypayload")
 def email_receipt_agent(activitypayload: str):
     data = json.loads(activitypayload)
-    # TO-DO: Add the logic for monitoring the email inbox and retrieving invoices
-    return {"invoice_document": "retrieved_invoice.pdf"}
+    # TO-DO: Add the logic for the Email Receipt Agent
+    return {"invoice_document": "dummy_invoice_document"}
 
 @app.activity_trigger(input_name="activitypayload")
 def ocr_extraction_agent(activitypayload: str):
     data = json.loads(activitypayload)
-    # TO-DO: Add the logic for extracting text from the invoice document using OCR
-    return {"extracted_text": "extracted text from invoice"}
+    # TO-DO: Add the logic for the OCR Extraction Agent
+    return {"extracted_text": "dummy_extracted_text"}
 
 @app.activity_trigger(input_name="activitypayload")
 def document_analysis_agent(activitypayload: str):
     data = json.loads(activitypayload)
-    # TO-DO: Add the logic for analyzing the extracted text to identify and categorize relevant information
-    return {"categorized_data": "categorized and identified data"}
+    # TO-DO: Add the logic for the Document Analysis Agent
+    return {"categorized_data": "dummy_categorized_data"}
 
 @app.activity_trigger(input_name="activitypayload")
 def extraction_refinement_agent(activitypayload: str):
     data = json.loads(activitypayload)
-    # TO-DO: Add the logic for refining the extracted data and mapping it into expected fields
-    return {"refined_data": "refined and mapped data"}
+    # TO-DO: Add the logic for the Extraction Refinement Agent
+    return {"refined_data": "dummy_refined_data"}
 
 @app.activity_trigger(input_name="activitypayload")
 def review_agent(activitypayload: str):
     data = json.loads(activitypayload)
-    # TO-DO: Add the logic for reviewing the refined extract to check for completeness and accuracy
-    return {"reviewed_data": "reviewed data"}
+    # TO-DO: Add the logic for the Review Agent
+    return {"reviewed_data": "dummy_reviewed_data"}
 
 @app.activity_trigger(input_name="activitypayload")
 def completion_check_agent(activitypayload: str):
     data = json.loads(activitypayload)
-    # TO-DO: Add the logic for determining if the data is complete and accurate
+    # TO-DO: Add the logic for the Completion Check Agent
     return {"is_complete": True}
 
 @app.activity_trigger(input_name="activitypayload")
 def final_formatting_agent(activitypayload: str):
     data = json.loads(activitypayload)
-    # TO-DO: Add the logic for performing final formatting to ensure consistency of the extraction values
-    return {"formatted_data": "formatted and consistent data"}
+    # TO-DO: Add the logic for the Final Formatting Agent
+    return {"formatted_data": "dummy_formatted_data"}
